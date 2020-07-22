@@ -16,7 +16,9 @@ class BaseController {
             user: {
                 agent: {},
                 ip: {}
-            }
+            },
+            logo: '',
+            footer: ''
         }
     }
 
@@ -32,6 +34,8 @@ class BaseController {
         this.baseConfig.baseUrl = `${request.protocol}://${request.get('host')}${config.application.basePath}`;
         this.baseConfig.appName = config.application.name;
         this.baseConfig.env = config.application.env;
+        this.baseConfig.logo = config.logo;
+        this.baseConfig.footer = config.footer;
         this.baseConfig.user.agent = request.useragent;
         this.baseConfig.user.ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress;
 
