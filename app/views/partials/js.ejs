@@ -3,23 +3,31 @@
     window.addEventListener("load", function () {
         // Check if JS is enabled
         document.querySelector("#javascript-enabled").innerHTML = "✅";
+        document.querySelector("input[name='javascript_enabled']").value = "true";
 
         // Locale
         document.querySelector("#locale").innerHTML = navigator.language || navigator.userLanguage;
+        document.querySelector("input[name='locale']").value = navigator.language || navigator.userLanguage;
 
         // Screen information
         document.querySelector("#screen-size").innerHTML = window.screen.width * Math.round(window.devicePixelRatio) + "x" + window.screen.height * Math.round(window.devicePixelRatio);
         document.querySelector("#browser-size").innerHTML = window.innerWidth + "x" + window.innerHeight;
         document.querySelector("#color-depth").innerHTML = window.screen.colorDepth + " bits";
         document.querySelector("#device-pixel-ratio").innerHTML = Math.round(window.devicePixelRatio);
+        document.querySelector("input[name='screen_size']").value = window.screen.width * Math.round(window.devicePixelRatio) + "x" + window.screen.height * Math.round(window.devicePixelRatio);
+        document.querySelector("input[name='browser_size']").value = window.innerWidth + "x" + window.innerHeight;
+        document.querySelector("input[name='color_depth']").value = window.screen.colorDepth + " bits";
+        document.querySelector("input[name='device_pixel_ratio']").value = Math.round(window.devicePixelRatio);
 
         // WebGL support
         var canvas = document.createElement("canvas");
         var gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
         if (gl && gl instanceof WebGLRenderingContext) {
             document.querySelector("#webgl-support").innerHTML = "✅";
+            document.querySelector("input[name='webgl_support']").value = "true";
         } else {
             document.querySelector("#webgl-support").innerHTML = "❌";
+            document.querySelector("input[name='webgl_support']").value = "false";
         }
 
         // Cookies enabled
@@ -30,22 +38,28 @@
         }
         if (cookieEnabled) {
             document.querySelector("#cookies-enabled").innerHTML = "✅";
+            document.querySelector("input[name='cookies_enabled']").value = "true";
         } else {
             document.querySelector("#cookies-enabled").innerHTML = "❌";
+            document.querySelector("input[name='cookies_enabled']").value = "false";
         }
 
         // Adblocker enabled
         if (document.getElementById('THCaZrUgPSEF')) {
             document.querySelector("#adblock-enabled").innerHTML = "❌";
+            document.querySelector("input[name='adblock_enabled']").value = "true";
         } else {
             document.querySelector("#adblock-enabled").innerHTML = "✅";
+            document.querySelector("input[name='adblock_enabled']").value = "false";
         }
 
         // WebSocket support
         if ('WebSocket' in window || 'MozWebSocket' in window) {
             document.querySelector("#websocket-support").innerHTML = "✅";
+            document.querySelector("input[name='websocket_support']").value = "true";
         } else {
             document.querySelector("#websocket-support").innerHTML = "❌";
+            document.querySelector("input[name='websocket_support']").value = "false";
         }
 
         // WebAudio support
@@ -55,15 +69,19 @@
             var context = new AudioContext();
 
             document.querySelector("#webaudio-support").innerHTML = "✅";
+            document.querySelector("input[name='webaudio_support']").value = "true";
         } catch (e) {
             document.querySelector("#webaudio-support").innerHTML = "❌";
+            document.querySelector("input[name='webaudio_support']").value = "false";
         }
 
         // Java support
         if (navigator.javaEnabled()) {
             document.querySelector("#java-support").innerHTML = "✅";
+            document.querySelector("input[name='java_support']").value = "true";
         } else {
             document.querySelector("#java-support").innerHTML = "❌";
+            document.querySelector("input[name='java_support']").value = "false";
         }
 
         // Flash support
@@ -75,15 +93,19 @@
         }
         if (hasFlash) {
             document.querySelector("#flash-support").innerHTML = "✅";
+            document.querySelector("input[name='flash_support']").value = "true";
         } else {
             document.querySelector("#flash-support").innerHTML = "❌";
+            document.querySelector("input[name='flash_support']").value = "false";
         }
 
         // Service Worker support
         if ('serviceWorker' in navigator) {
             document.querySelector("#service-worker-support").innerHTML = "✅";
+            document.querySelector("input[name='service_worker_support']").value = "true";
         } else {
             document.querySelector("#service-worker-support").innerHTML = "❌";
+            document.querySelector("input[name='service_worker_support']").value = "false";
         }
 
         // Local Storage support
@@ -92,26 +114,33 @@
             localStorage.setItem(test, test);
             localStorage.removeItem(test);
             document.querySelector("#local-storage-support").innerHTML = "✅";
+            document.querySelector("input[name='local_storage_support']").value = "true";
         } catch (e) {
             document.querySelector("#local-storage-support").innerHTML = "❌";
+            document.querySelector("input[name='local_storage_support']").value = "false";
         }
 
         // WebVR support
         if ('getVRDisplays' in navigator) {
             document.querySelector("#webvr-support").innerHTML = "✅";
+            document.querySelector("input[name='webvr_support']").value = "true";
         } else {
             document.querySelector("#webvr-support").innerHTML = "❌";
+            document.querySelector("input[name='webvr_support']").value = "false";
         }
 
         // Do Not Track enabled
         if (window.doNotTrack || navigator.doNotTrack || navigator.msDoNotTrack) {
             if (window.doNotTrack == "1" || navigator.doNotTrack == "yes" || navigator.doNotTrack == "1" || navigator.msDoNotTrack == "1") {
                 document.querySelector("#do-not-track-enabled").innerHTML = "✅";
+                document.querySelector("input[name='do_not_track_enabled']").value = "true";
             } else {
                 document.querySelector("#do-not-track-enabled").innerHTML = "❌";
+                document.querySelector("input[name='do_not_track_enabled']").value = "false";
             }
         } else {
             document.querySelector("#do-not-track-enabled").innerHTML = "❌";
+            document.querySelector("input[name='do_not_track_enabled']").value = "false";
         }
     });
 </script>

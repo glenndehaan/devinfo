@@ -44,7 +44,7 @@
         border-top: 1px solid gray;
     }
 
-    button {
+    input[type='submit'] {
         background-color: #269;
         color: white;
 
@@ -56,9 +56,10 @@
         border-radius: 25px;
 
         transition: 0.3s;
+        cursor: pointer;
     }
 
-    button:hover {
+    input[type='submit']:hover {
         background-color: #4e84ad;
     }
 
@@ -86,6 +87,13 @@
 
     #share-info {
         height: 150px;
+    }
+
+    #share-link {
+        background: rgba(203, 213, 224, 0.9);
+        border-radius: 15px;
+        margin: 0 10px 20px 10px;
+        padding: 20px;
     }
 
     .column {
@@ -125,6 +133,11 @@
         #container {
             margin: 0;
             width: 100%;
+        }
+
+        #share-link {
+            margin: 0 0 20px 0;
+            border-radius: 0;
         }
 
         .column {

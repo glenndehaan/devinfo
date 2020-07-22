@@ -45,6 +45,13 @@ class web {
         app.use(useragent.express());
 
         /**
+         * Include form data
+         */
+        app.use(express.urlencoded({
+            extended: true
+        }));
+
+        /**
          * Request logger
          */
         app.use((req, res, next) => {
@@ -57,6 +64,9 @@ class web {
          */
         app.get('/', (req, res) => {
             indexController.indexAction(req, res);
+        });
+        app.post('/', (req, res) => {
+            indexController.saveAction(req, res);
         });
 
         /**

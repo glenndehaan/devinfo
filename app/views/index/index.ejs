@@ -2,6 +2,11 @@
     <div id="logo">
         <%- logo %>
     </div>
+    <% if (typeof uuid !== "undefined") { %>
+        <div id="share-link">
+            <strong>Your link has been generated:</strong> <%= baseUrl %>report/<%= uuid %>
+        </div>
+    <% } %>
     <div class="row">
         <div id="os-info" class="column">
             <h2>System Information</h2>
@@ -162,8 +167,49 @@
         </div>
         <div id="share-info" class="column">
             <h2>Share</h2>
-            Use the button below to create a sharable link for people who need this system's information:<br/>
-            <button>Create share link</button>
+            <% if (typeof uuid !== "undefined") { %>
+                <strong>Your link has been generated:</strong><br/><br/>
+                <%= baseUrl %>report/<%= uuid %>
+            <% } %>
+            <% if (typeof uuid === "undefined") { %>
+                Use the button below to create a sharable link for people who need this system's information:<br/>
+                <form action="/" method="post">
+            <% } %>
+                    <input type="text" name="agent_os" value="<%= user.agent.os %>" hidden/>
+                    <input type="text" name="agent_platform" value="<%= user.agent.platform %>" hidden/>
+                    <input type="text" name="agent_browser" value="<%= user.agent.browser %>" hidden/>
+                    <input type="text" name="agent_version" value="<%= user.agent.version %>" hidden/>
+                    <input type="text" name="agent_source" value="<%= user.agent.source %>" hidden/>
+
+                    <input type="text" name="ip" value="<%= user.ip.source %>" hidden/>
+                    <input type="text" name="ip_is_valid" value="<%= user.ip.data.isValid %>" hidden/>
+                    <input type="text" name="ip_is_bogon" value="<%= user.ip.data.isBogon %>" hidden/>
+                    <input type="text" name="ip_is_apipa" value="<%= user.ip.data.isApipa %>" hidden/>
+                    <input type="text" name="ip_is_multicast" value="<%= user.ip.data.isMulticast %>" hidden/>
+                    <input type="text" name="ip_is_rfc1918" value="<%= user.ip.data.isRfc1918 %>" hidden/>
+                    <input type="text" name="ip_is_public" value="<%= user.ip.data.isPublicIp %>" hidden/>
+
+                    <input type="text" name="javascript_enabled" value="" hidden/>
+                    <input type="text" name="cookies_enabled" value="" hidden/>
+                    <input type="text" name="adblock_enabled" value="" hidden/>
+                    <input type="text" name="do_not_track_enabled" value="" hidden/>
+                    <input type="text" name="flash_support" value="" hidden/>
+                    <input type="text" name="java_support" value="" hidden/>
+                    <input type="text" name="websocket_support" value="" hidden/>
+                    <input type="text" name="webaudio_support" value="" hidden/>
+                    <input type="text" name="webgl_support" value="" hidden/>
+                    <input type="text" name="webvr_support" value="" hidden/>
+                    <input type="text" name="service_worker_support" value="" hidden/>
+                    <input type="text" name="local_storage_support" value="" hidden/>
+                    <input type="text" name="locale" value="" hidden/>
+                    <input type="text" name="browser_size" value="" hidden/>
+                    <input type="text" name="screen_size" value="" hidden/>
+                    <input type="text" name="color_depth" value="" hidden/>
+                    <input type="text" name="device_pixel_ratio" value="" hidden/>
+            <% if (typeof uuid === "undefined") { %>
+                    <input type="submit" value="Create share link"/>
+                </form>
+            <% } %>
         </div>
     </div>
 </div>
