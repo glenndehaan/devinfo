@@ -49,6 +49,20 @@ class IndexController extends baseController {
     }
 
     /**
+     * Renders the Report page
+     *
+     * @param req
+     * @param res
+     */
+    reportAction(req, res) {
+        res.render('index', this.mergePageConfig(req, {
+            template: 'index/index',
+            pageTitle: 'Report',
+            js: false
+        }));
+    }
+
+    /**
      * Renders the 404 page
      *
      * @param req

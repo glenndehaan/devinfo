@@ -68,6 +68,9 @@ class web {
         app.post('/', (req, res) => {
             indexController.saveAction(req, res);
         });
+        app.get('/report/:uuid', (req, res) => {
+            indexController.reportAction(req, res);
+        });
 
         /**
          * Setup default 404 message

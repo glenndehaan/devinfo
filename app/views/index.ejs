@@ -8,6 +8,9 @@
         <footer>
             <%- footer %>
         </footer>
-        <%- include('partials/js') %>
+
+        <% if(js) { %>
+            <%- include('partials/js') %>
+        <% } %>
     </body>
 </html>
