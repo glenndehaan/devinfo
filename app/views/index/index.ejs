@@ -1,0 +1,171 @@
+<div id="container">
+    <div id="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" height="120" width="120" viewBox="0 0 24 24">
+            <path fill="white" d="M13 7h-2v2h2V7zm0 4h-2v6h2v-6zm4-9.99L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/>
+        </svg>
+    </div>
+    <div class="row">
+        <div id="os-info" class="column">
+            <h2>System Information</h2>
+            <table>
+                <tr>
+                    <td class="table-item">OS</td>
+                    <td><%= user.agent.os %></td>
+                </tr>
+                <tr>
+                    <td>Platform</td>
+                    <td><%= user.agent.platform %></td>
+                </tr>
+                <tr>
+                    <td>Browser</td>
+                    <td><%= user.agent.browser %></td>
+                </tr>
+                <tr>
+                    <td>Browser Version</td>
+                    <td><%= user.agent.version %></td>
+                </tr>
+                <tr>
+                    <td>User Agent String</td>
+                    <td><%= user.agent.source %></td>
+                </tr>
+            </table>
+        </div>
+        <div id="ip-info" class="column">
+            <h2>IP Information</h2>
+            <table>
+                <tr>
+                    <td class="table-item">IP</td>
+                    <td><%= user.ip.source %></td>
+                </tr>
+                <tr>
+                    <td>IP: Valid</td>
+                    <% if (user.ip.data.isValid) { %>
+                        <td>✅</td>
+                    <% } else { %>
+                        <td>❌</td>
+                    <% } %>
+                </tr>
+                <tr>
+                    <td>IP: Bogon</td>
+                    <% if (user.ip.data.isBogon) { %>
+                        <td>✅</td>
+                    <% } else { %>
+                        <td>❌</td>
+                    <% } %>
+                </tr>
+                <tr>
+                    <td>IP: APIPA</td>
+                    <% if (user.ip.data.isApipa) { %>
+                        <td>✅</td>
+                    <% } else { %>
+                        <td>❌</td>
+                    <% } %>
+                </tr>
+                <tr>
+                    <td>IP: Multicast</td>
+                    <% if (user.ip.data.isMulticast) { %>
+                        <td>✅</td>
+                    <% } else { %>
+                        <td>❌</td>
+                    <% } %>
+                </tr>
+                <tr>
+                    <td>IP: Rfc1918</td>
+                    <% if (user.ip.data.isRfc1918) { %>
+                        <td>✅</td>
+                    <% } else { %>
+                        <td>❌</td>
+                    <% } %>
+                </tr>
+                <tr>
+                    <td>IP: Public</td>
+                    <% if (user.ip.data.isPublicIp) { %>
+                        <td>✅</td>
+                    <% } else { %>
+                        <td>❌</td>
+                    <% } %>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div id="browser-info" class="column">
+            <h2>Browser Information</h2>
+            <table>
+                <tr>
+                    <td>Javascript Enabled</td>
+                    <td id="javascript-enabled"><noscript>❌</noscript></td>
+                </tr>
+                <tr>
+                    <td>Cookies Enabled</td>
+                    <td id="cookies-enabled"><noscript>❌</noscript></td>
+                </tr>
+                <tr>
+                    <td>AdBlock Enabled</td>
+                    <td id="adblock-enabled"><noscript>❌</noscript></td>
+                </tr>
+                <tr>
+                    <td>Do Not Track Enabled</td>
+                    <td id="do-not-track-enabled"><noscript>❌</noscript></td>
+                </tr>
+                <tr>
+                    <td>Flash Supported</td>
+                    <td id="flash-support"><noscript>❌</noscript></td>
+                </tr>
+                <tr>
+                    <td>Java Supported</td>
+                    <td id="java-support"><noscript>❌</noscript></td>
+                </tr>
+                <tr>
+                    <td>WebSockets Supported</td>
+                    <td id="websocket-support"><noscript>❌</noscript></td>
+                </tr>
+                <tr>
+                    <td>WebAudio Supported</td>
+                    <td id="webaudio-support"><noscript>❌</noscript></td>
+                </tr>
+                <tr>
+                    <td>WebGL Supported</td>
+                    <td id="webgl-support"><noscript>❌</noscript></td>
+                </tr>
+                <tr>
+                    <td>WebVR Supported</td>
+                    <td id="webvr-support"><noscript>❌</noscript></td>
+                </tr>
+                <tr>
+                    <td>Service Worker Supported</td>
+                    <td id="service-worker-support"><noscript>❌</noscript></td>
+                </tr>
+                <tr>
+                    <td>Local Storage Supported</td>
+                    <td id="local-storage-support"><noscript>❌</noscript></td>
+                </tr>
+                <tr>
+                    <td>Locale</td>
+                    <td id="locale"><noscript>❌</noscript></td>
+                </tr>
+                <tr>
+                    <td>Browser size</td>
+                    <td id="browser-size"><noscript>❌</noscript></td>
+                </tr>
+                <tr>
+                    <td>Screen size</td>
+                    <td id="screen-size"><noscript>❌</noscript></td>
+                </tr>
+                <tr>
+                    <td>Color depth</td>
+                    <td id="color-depth"><noscript>❌</noscript></td>
+                </tr>
+                <tr>
+                    <td>Device Pixel Ratio</td>
+                    <td id="device-pixel-ratio"><noscript>❌</noscript></td>
+                </tr>
+            </table>
+        </div>
+        <div id="share-info" class="column">
+            <h2>Share</h2>
+            Use the button below to create a sharable link for people who need this system's information:<br/>
+            <button>Create share link</button>
+        </div>
+    </div>
+</div>

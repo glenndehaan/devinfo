@@ -1,0 +1,117 @@
+<script src="/dfp.js" type="text/javascript"></script>
+<script type="text/javascript">
+    window.addEventListener("load", function () {
+        // Check if JS is enabled
+        document.querySelector("#javascript-enabled").innerHTML = "✅";
+
+        // Locale
+        document.querySelector("#locale").innerHTML = navigator.language || navigator.userLanguage;
+
+        // Screen information
+        document.querySelector("#screen-size").innerHTML = window.screen.width * Math.round(window.devicePixelRatio) + "x" + window.screen.height * Math.round(window.devicePixelRatio);
+        document.querySelector("#browser-size").innerHTML = window.innerWidth + "x" + window.innerHeight;
+        document.querySelector("#color-depth").innerHTML = window.screen.colorDepth + " bits";
+        document.querySelector("#device-pixel-ratio").innerHTML = Math.round(window.devicePixelRatio);
+
+        // WebGL support
+        var canvas = document.createElement("canvas");
+        var gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+        if (gl && gl instanceof WebGLRenderingContext) {
+            document.querySelector("#webgl-support").innerHTML = "✅";
+        } else {
+            document.querySelector("#webgl-support").innerHTML = "❌";
+        }
+
+        // Cookies enabled
+        var cookieEnabled = (navigator.cookieEnabled) ? true : false;
+        if (typeof navigator.cookieEnabled == "undefined" && !cookieEnabled) {
+            document.cookie = "testcookie";
+            cookieEnabled = (document.cookie.indexOf("testcookie") != -1) ? true : false;
+        }
+        if (cookieEnabled) {
+            document.querySelector("#cookies-enabled").innerHTML = "✅";
+        } else {
+            document.querySelector("#cookies-enabled").innerHTML = "❌";
+        }
+
+        // Adblocker enabled
+        if (document.getElementById('THCaZrUgPSEF')) {
+            document.querySelector("#adblock-enabled").innerHTML = "❌";
+        } else {
+            document.querySelector("#adblock-enabled").innerHTML = "✅";
+        }
+
+        // WebSocket support
+        if ('WebSocket' in window || 'MozWebSocket' in window) {
+            document.querySelector("#websocket-support").innerHTML = "✅";
+        } else {
+            document.querySelector("#websocket-support").innerHTML = "❌";
+        }
+
+        // WebAudio support
+        try {
+            // Fix up for prefixing
+            window.AudioContext = window.AudioContext || window.webkitAudioContext;
+            var context = new AudioContext();
+
+            document.querySelector("#webaudio-support").innerHTML = "✅";
+        } catch (e) {
+            document.querySelector("#webaudio-support").innerHTML = "❌";
+        }
+
+        // Java support
+        if (navigator.javaEnabled()) {
+            document.querySelector("#java-support").innerHTML = "✅";
+        } else {
+            document.querySelector("#java-support").innerHTML = "❌";
+        }
+
+        // Flash support
+        var hasFlash = false;
+        try {
+            hasFlash = Boolean(new ActiveXObject('ShockwaveFlash.ShockwaveFlash'));
+        } catch (exception) {
+            hasFlash = ('undefined' != typeof navigator.mimeTypes['application/x-shockwave-flash']);
+        }
+        if (hasFlash) {
+            document.querySelector("#flash-support").innerHTML = "✅";
+        } else {
+            document.querySelector("#flash-support").innerHTML = "❌";
+        }
+
+        // Service Worker support
+        if ('serviceWorker' in navigator) {
+            document.querySelector("#service-worker-support").innerHTML = "✅";
+        } else {
+            document.querySelector("#service-worker-support").innerHTML = "❌";
+        }
+
+        // Local Storage support
+        var test = 'test';
+        try {
+            localStorage.setItem(test, test);
+            localStorage.removeItem(test);
+            document.querySelector("#local-storage-support").innerHTML = "✅";
+        } catch (e) {
+            document.querySelector("#local-storage-support").innerHTML = "❌";
+        }
+
+        // WebVR support
+        if ('getVRDisplays' in navigator) {
+            document.querySelector("#webvr-support").innerHTML = "✅";
+        } else {
+            document.querySelector("#webvr-support").innerHTML = "❌";
+        }
+
+        // Do Not Track enabled
+        if (window.doNotTrack || navigator.doNotTrack || navigator.msDoNotTrack) {
+            if (window.doNotTrack == "1" || navigator.doNotTrack == "yes" || navigator.doNotTrack == "1" || navigator.msDoNotTrack == "1") {
+                document.querySelector("#do-not-track-enabled").innerHTML = "✅";
+            } else {
+                document.querySelector("#do-not-track-enabled").innerHTML = "❌";
+            }
+        } else {
+            document.querySelector("#do-not-track-enabled").innerHTML = "❌";
+        }
+    });
+</script>
