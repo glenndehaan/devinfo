@@ -27,8 +27,18 @@ class report {
         fs.writeFileSync(`${location}/${uuid}.json`, JSON.stringify(saveData));
     }
 
-    load() {
-
+    /**
+     * Load a report from disk
+     *
+     * @param uuid
+     * @return {boolean|any}
+     */
+    load(uuid) {
+        if(fs.existsSync(`${location}/${uuid}.json`)) {
+            return JSON.parse(fs.readFileSync(`${location}/${uuid}.json`));
+        } else {
+            return false;
+        }
     }
 }
 

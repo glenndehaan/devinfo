@@ -17,7 +17,7 @@ class IndexController extends baseController {
      * @param res
      */
     indexAction(req, res) {
-        if(typeof req.query.uuid !== "undefined") {
+        if(req.query.uuid) {
             res.render('index', this.mergePageConfig(req, {
                 template: 'index/index',
                 pageTitle: 'Home',
@@ -55,11 +55,23 @@ class IndexController extends baseController {
      * @param res
      */
     reportAction(req, res) {
-        res.render('index', this.mergePageConfig(req, {
-            template: 'index/index',
-            pageTitle: 'Report',
-            js: false
-        }));
+        const uuid = req.params.uuid;
+        const reportData = report.load(uuid);
+
+        if(reportData) {
+            res.render('index', this.mergePageConfig(req, {
+                template: 'index/index',
+                pageTitle: 'Report',
+                js: false,
+                report: reportData
+            }));
+        } else {
+            res.render('index', this.mergePageConfig(req, {
+                template: 'general/notfound',
+                pageTitle: 'Not Found',
+                js: false
+            }));
+        }
     }
 
     /**
@@ -71,7 +83,8 @@ class IndexController extends baseController {
     notFoundAction(req, res) {
         res.render('index', this.mergePageConfig(req, {
             template: 'general/notfound',
-            pageTitle: 'Not Found'
+            pageTitle: 'Not Found',
+            js: false
         }));
     }
 }

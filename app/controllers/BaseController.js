@@ -19,7 +19,9 @@ class BaseController {
             },
             logo: '',
             footer: '',
-            js: true
+            uuid: undefined,
+            js: true,
+            report: undefined
         }
     }
 
@@ -47,6 +49,10 @@ class BaseController {
             source: ip,
             data: ipData
         };
+
+        this.baseConfig.uuid = undefined;
+        this.baseConfig.report = undefined;
+        this.baseConfig.js = true;
 
         return Object.assign(this.baseConfig, pageSpecificConfig);
     }

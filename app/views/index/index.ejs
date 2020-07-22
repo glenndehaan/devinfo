@@ -13,23 +13,23 @@
             <table>
                 <tr>
                     <td class="table-item">OS</td>
-                    <td><%= user.agent.os %></td>
+                    <td><%= js ? user.agent.os : report.agent_os %></td>
                 </tr>
                 <tr>
                     <td>Platform</td>
-                    <td><%= user.agent.platform %></td>
+                    <td><%= js ? user.agent.platform : report.agent_platform %></td>
                 </tr>
                 <tr>
                     <td>Browser</td>
-                    <td><%= user.agent.browser %></td>
+                    <td><%= js ? user.agent.browser : report.agent_browser %></td>
                 </tr>
                 <tr>
                     <td>Browser Version</td>
-                    <td><%= user.agent.version %></td>
+                    <td><%= js ? user.agent.version : report.agent_version %></td>
                 </tr>
                 <tr>
                     <td>User Agent String</td>
-                    <td><%= user.agent.source %></td>
+                    <td><%= js ? user.agent.source : report.agent_source %></td>
                 </tr>
             </table>
         </div>
@@ -38,54 +38,102 @@
             <table>
                 <tr>
                     <td class="table-item">IP</td>
-                    <td><%= user.ip.source %></td>
+                    <td><%= js ? user.ip.source : report.ip %></td>
                 </tr>
                 <tr>
                     <td>IP: Valid</td>
-                    <% if (user.ip.data.isValid) { %>
-                        <td>✅</td>
+                    <% if (js) { %>
+                        <% if (user.ip.data.isValid) { %>
+                            <td>✅</td>
+                        <% } else { %>
+                            <td>❌</td>
+                        <% } %>
                     <% } else { %>
-                        <td>❌</td>
+                        <% if (report.ip_is_valid == 'true') { %>
+                            <td>✅</td>
+                        <% } else { %>
+                            <td>❌</td>
+                        <% } %>
                     <% } %>
                 </tr>
                 <tr>
                     <td>IP: Bogon</td>
-                    <% if (user.ip.data.isBogon) { %>
-                        <td>✅</td>
+                    <% if (js) { %>
+                        <% if (user.ip.data.isBogon) { %>
+                            <td>✅</td>
+                        <% } else { %>
+                            <td>❌</td>
+                        <% } %>
                     <% } else { %>
-                        <td>❌</td>
+                        <% if (report.ip_is_bogon == 'true') { %>
+                            <td>✅</td>
+                        <% } else { %>
+                            <td>❌</td>
+                        <% } %>
                     <% } %>
                 </tr>
                 <tr>
                     <td>IP: APIPA</td>
-                    <% if (user.ip.data.isApipa) { %>
-                        <td>✅</td>
+                    <% if (js) { %>
+                        <% if (user.ip.data.isApipa) { %>
+                            <td>✅</td>
+                        <% } else { %>
+                            <td>❌</td>
+                        <% } %>
                     <% } else { %>
-                        <td>❌</td>
+                        <% if (report.ip_is_apipa == 'true') { %>
+                            <td>✅</td>
+                        <% } else { %>
+                            <td>❌</td>
+                        <% } %>
                     <% } %>
                 </tr>
                 <tr>
                     <td>IP: Multicast</td>
-                    <% if (user.ip.data.isMulticast) { %>
-                        <td>✅</td>
+                    <% if (js) { %>
+                        <% if (user.ip.data.isMulticast) { %>
+                            <td>✅</td>
+                        <% } else { %>
+                            <td>❌</td>
+                        <% } %>
                     <% } else { %>
-                        <td>❌</td>
+                        <% if (report.ip_is_multicast == 'true') { %>
+                            <td>✅</td>
+                        <% } else { %>
+                            <td>❌</td>
+                        <% } %>
                     <% } %>
                 </tr>
                 <tr>
                     <td>IP: Rfc1918</td>
-                    <% if (user.ip.data.isRfc1918) { %>
-                        <td>✅</td>
+                    <% if (js) { %>
+                        <% if (user.ip.data.isRfc1918) { %>
+                            <td>✅</td>
+                        <% } else { %>
+                            <td>❌</td>
+                        <% } %>
                     <% } else { %>
-                        <td>❌</td>
+                        <% if (report.ip_is_rfc1918 == 'true') { %>
+                            <td>✅</td>
+                        <% } else { %>
+                            <td>❌</td>
+                        <% } %>
                     <% } %>
                 </tr>
                 <tr>
                     <td>IP: Public</td>
-                    <% if (user.ip.data.isPublicIp) { %>
-                        <td>✅</td>
+                    <% if (js) { %>
+                        <% if (user.ip.data.isPublicIp) { %>
+                            <td>✅</td>
+                        <% } else { %>
+                            <td>❌</td>
+                        <% } %>
                     <% } else { %>
-                        <td>❌</td>
+                        <% if (report.ip_is_public == 'true') { %>
+                            <td>✅</td>
+                        <% } else { %>
+                            <td>❌</td>
+                        <% } %>
                     <% } %>
                 </tr>
             </table>
@@ -97,71 +145,71 @@
             <table>
                 <tr>
                     <td>Javascript Enabled</td>
-                    <td id="javascript-enabled"><noscript>❌</noscript></td>
+                    <td id="javascript-enabled"><%- js ? '<noscript>❌</noscript>' : report.javascript_enabled == 'true' ? '✅' : '❌' %></td>
                 </tr>
                 <tr>
                     <td>Cookies Enabled</td>
-                    <td id="cookies-enabled"><noscript>❌</noscript></td>
+                    <td id="cookies-enabled"><%- js ? '<noscript>❌</noscript>' : report.cookies_enabled == 'true' ? '✅' : '❌' %></td>
                 </tr>
                 <tr>
                     <td>AdBlock Enabled</td>
-                    <td id="adblock-enabled"><noscript>❌</noscript></td>
+                    <td id="adblock-enabled"><%- js ? '<noscript>❌</noscript>' : report.adblock_enabled == 'true' ? '✅' : '❌' %></td>
                 </tr>
                 <tr>
                     <td>Do Not Track Enabled</td>
-                    <td id="do-not-track-enabled"><noscript>❌</noscript></td>
+                    <td id="do-not-track-enabled"><%- js ? '<noscript>❌</noscript>' : report.do_not_track_enabled == 'true' ? '✅' : '❌' %></td>
                 </tr>
                 <tr>
                     <td>Flash Supported</td>
-                    <td id="flash-support"><noscript>❌</noscript></td>
+                    <td id="flash-support"><%- js ? '<noscript>❌</noscript>' : report.flash_support == 'true' ? '✅' : '❌' %></td>
                 </tr>
                 <tr>
                     <td>Java Supported</td>
-                    <td id="java-support"><noscript>❌</noscript></td>
+                    <td id="java-support"><%- js ? '<noscript>❌</noscript>' : report.java_support == 'true' ? '✅' : '❌' %></td>
                 </tr>
                 <tr>
                     <td>WebSockets Supported</td>
-                    <td id="websocket-support"><noscript>❌</noscript></td>
+                    <td id="websocket-support"><%- js ? '<noscript>❌</noscript>' : report.websocket_support == 'true' ? '✅' : '❌' %></td>
                 </tr>
                 <tr>
                     <td>WebAudio Supported</td>
-                    <td id="webaudio-support"><noscript>❌</noscript></td>
+                    <td id="webaudio-support"><%- js ? '<noscript>❌</noscript>' : report.webaudio_support == 'true' ? '✅' : '❌' %></td>
                 </tr>
                 <tr>
                     <td>WebGL Supported</td>
-                    <td id="webgl-support"><noscript>❌</noscript></td>
+                    <td id="webgl-support"><%- js ? '<noscript>❌</noscript>' : report.webgl_support == 'true' ? '✅' : '❌' %></td>
                 </tr>
                 <tr>
                     <td>WebVR Supported</td>
-                    <td id="webvr-support"><noscript>❌</noscript></td>
+                    <td id="webvr-support"><%- js ? '<noscript>❌</noscript>' : report.webvr_support == 'true' ? '✅' : '❌' %></td>
                 </tr>
                 <tr>
                     <td>Service Worker Supported</td>
-                    <td id="service-worker-support"><noscript>❌</noscript></td>
+                    <td id="service-worker-support"><%- js ? '<noscript>❌</noscript>' : report.service_worker_support == 'true' ? '✅' : '❌' %></td>
                 </tr>
                 <tr>
                     <td>Local Storage Supported</td>
-                    <td id="local-storage-support"><noscript>❌</noscript></td>
+                    <td id="local-storage-support"><%- js ? '<noscript>❌</noscript>' : report.local_storage_support == 'true' ? '✅' : '❌' %></td>
                 </tr>
                 <tr>
                     <td>Locale</td>
-                    <td id="locale"><noscript>❌</noscript></td>
+                    <td id="locale"><%- js ? '<noscript>❌</noscript>' : report.locale != '' ? report.locale : '❌' %></td>
                 </tr>
                 <tr>
                     <td>Browser size</td>
-                    <td id="browser-size"><noscript>❌</noscript></td>
+                    <td id="browser-size"><%- js ? '<noscript>❌</noscript>' : report.browser_size != '' ? report.browser_size : '❌' %></td>
                 </tr>
                 <tr>
                     <td>Screen size</td>
-                    <td id="screen-size"><noscript>❌</noscript></td>
+                    <td id="screen-size"><%- js ? '<noscript>❌</noscript>' : report.screen_size != '' ? report.screen_size : '❌' %></td>
                 </tr>
                 <tr>
                     <td>Color depth</td>
-                    <td id="color-depth"><noscript>❌</noscript></td>
+                    <td id="color-depth"><%- js ? '<noscript>❌</noscript>' : report.color_depth != '' ? report.color_depth : '❌' %></td>
                 </tr>
                 <tr>
                     <td>Device Pixel Ratio</td>
-                    <td id="device-pixel-ratio"><noscript>❌</noscript></td>
+                    <td id="device-pixel-ratio"><%- js ? '<noscript>❌</noscript>' : report.device_pixel_ratio != '' ? report.device_pixel_ratio : '❌' %></td>
                 </tr>
             </table>
         </div>
@@ -217,12 +265,12 @@
                 <h2>Report Info</h2>
                 <table>
                     <tr>
-                        <td>UUID</td>
-                        <td></td>
+                        <td class="table-item">UUID</td>
+                        <td><%= report.uuid %></td>
                     </tr>
                     <tr>
                         <td>Created On</td>
-                        <td></td>
+                        <td><%= new Date(report.created) %></td>
                     </tr>
                 </table>
             </div>
