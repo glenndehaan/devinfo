@@ -1,0 +1,51 @@
+# Basic snap definition
+name: devinfo
+version: git
+summary: A system/browser info page used by developers to check browser specifics
+description: |
+  A system/browser info page used by developers to check browser specifics
+  Install instruction/Help: https://github.com/glenndehaan/devinfo
+license: MIT
+
+# Snap state
+confinement: strict
+grade: stable
+
+# Snap base image
+base: core18
+
+# Snap architectures
+architectures:
+  - build-on: amd64
+
+# Define snap build parts
+parts:
+  node:
+    plugin: dump
+    source: https://nodejs.org/dist/latest-v8.x/node-v8.17.0-linux-x64.tar.xz
+    stage:
+      - bin
+      - include
+      - lib
+  devinfo:
+    after: [node]
+    plugin: nil
+    source: .
+    override-build: |
+      npm config set unsafe-perm true
+      npm install
+      npm rebuild
+      cp -R . $SNAPCRAFT_PART_INSTALL/
+    build-packages:
+      - g++
+      - make
+
+# Define all snap commands/services
+apps:
+  devinfo-server:
+    command: bin/node $SNAP/app/bundle-snapcraft.js
+    daemon: simple
+    restart-condition: always
+    plugs:
+      - network
+      - network-bind

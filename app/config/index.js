@@ -5,9 +5,10 @@ const fs = require('fs');
 const deepmerge = require('deepmerge');
 
 /**
- * Check if we are using the dev version
+ * Check if we are using the production version
  */
-const dev = process.env.NODE_ENV !== 'production';
+const snapcraft = process.env.NODE_ENV === 'snapcraft';
+const docker = process.env.NODE_ENV === 'docker';
 
 /**
  * Declare base config
@@ -15,7 +16,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const baseConfig = {
     application: {
         name: "DevInfo",
-        env: dev ? "(local)" : "",
+        env: (!snapcraft && !docker) ? "(local)" : "",
         basePath: "/",
         host: "0.0.0.0",
         port: 4289
@@ -32,10 +33,23 @@ const baseConfig = {
  * Export the main config
  */
 try {
-    module.exports = deepmerge(baseConfig, eval('require')(dev ? __dirname + '/config.json' : process.cwd() + '/config.json'));
+    if(snapcraft) {
+        module.exports = deepmerge(baseConfig, eval('require')(`${process.env.SNAP_COMMON}/config.json`));
+    } else if(docker) {
+        //todo
+    } else {
+        module.exports = deepmerge(baseConfig, eval('require')(`${__dirname}/config.json`));
+    }
 } catch (e) {
     const config = fs.readFileSync(__dirname + '/../../_scripts/config/config.build.json', 'utf8');
-    fs.writeFileSync(dev ? __dirname + '/config.json' : process.cwd() + '/config.json', config);
 
-    module.exports = deepmerge(baseConfig, JSON.parse(config));
+    if(snapcraft) {
+        fs.writeFileSync(`${process.env.SNAP_COMMON}/config.json`, config);
+        module.exports = deepmerge(baseConfig, JSON.parse(config));
+    } else if(docker) {
+        //todo
+    } else {
+        fs.writeFileSync(`${__dirname}/config.json`, config);
+        module.exports = deepmerge(baseConfig, JSON.parse(config));
+    }
 }

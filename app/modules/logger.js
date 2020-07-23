@@ -5,22 +5,34 @@ const fs = require('fs');
 const config = require("../config");
 
 /**
- * Check if we are using the dev version
+ * Check if we are using the production version
  */
-const dev = process.env.NODE_ENV !== 'production';
+const snapcraft = process.env.NODE_ENV === 'snapcraft';
+const docker = process.env.NODE_ENV === 'docker';
 
 /**
  * Create log dir if it doesn't exists
  */
-if (!fs.existsSync(`${dev ? __dirname + '/../' : process.cwd() + '/'}${config.logger.location}`)){
-    fs.mkdirSync(`${dev ? __dirname + '/../' : process.cwd() + '/'}${config.logger.location}`);
+if(!snapcraft && !docker) {
+    if (!fs.existsSync(`${__dirname}/../${config.logger.location}`)){
+        fs.mkdirSync(`${__dirname}/../${config.logger.location}`);
+    }
 }
 
 /**
  * Setup logger
  */
+let logFilePath = '';
+if(snapcraft) {
+    logFilePath = `${process.env.SNAP_COMMON}/server.log`;
+} else if(docker) {
+    //todo
+} else {
+    logFilePath = `${__dirname}/../${config.logger.location}/server.log`;
+}
+
 const log = require('simple-node-logger').createSimpleLogger({
-    logFilePath: `${dev ? __dirname + '/../' : process.cwd() + '/'}${config.logger.location}/server.log`,
+    logFilePath: logFilePath,
     timestampFormat: 'YYYY-MM-DD HH:mm:ss.SSS'
 });
 
