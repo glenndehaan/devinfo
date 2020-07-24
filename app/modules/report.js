@@ -21,7 +21,10 @@ if(snapcraft) {
     }
     location = `${process.env.SNAP_COMMON}/reports`;
 } else if(docker) {
-    //todo
+    if (!fs.existsSync(`/var/app/reports`)){
+        fs.mkdirSync(`/var/app/reports`);
+    }
+    location = `/var/app/reports`;
 } else {
     location = `${__dirname}/../config/reports`;
 }

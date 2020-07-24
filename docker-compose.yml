@@ -1,0 +1,8 @@
+version: '3'
+services:
+  app:
+    image: glenndehaan/devinfo
+    ports:
+      - "4289:4289"
+    volumes:
+      - ./devinfo_docker_config:/var/app

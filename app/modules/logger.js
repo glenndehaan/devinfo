@@ -26,7 +26,7 @@ let logFilePath = '';
 if(snapcraft) {
     logFilePath = `${process.env.SNAP_COMMON}/server.log`;
 } else if(docker) {
-    //todo
+    logFilePath = `/var/app/server.log`;
 } else {
     logFilePath = `${__dirname}/../${config.logger.location}/server.log`;
 }

@@ -36,7 +36,7 @@ try {
     if(snapcraft) {
         module.exports = deepmerge(baseConfig, eval('require')(`${process.env.SNAP_COMMON}/config.json`));
     } else if(docker) {
-        //todo
+        module.exports = deepmerge(baseConfig, eval('require')(`/var/app/config.json`));
     } else {
         module.exports = deepmerge(baseConfig, eval('require')(`${__dirname}/config.json`));
     }
@@ -47,7 +47,8 @@ try {
         fs.writeFileSync(`${process.env.SNAP_COMMON}/config.json`, config);
         module.exports = deepmerge(baseConfig, JSON.parse(config));
     } else if(docker) {
-        //todo
+        fs.writeFileSync(`/var/app/config.json`, config);
+        module.exports = deepmerge(baseConfig, JSON.parse(config));
     } else {
         fs.writeFileSync(`${__dirname}/config.json`, config);
         module.exports = deepmerge(baseConfig, JSON.parse(config));
