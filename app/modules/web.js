@@ -4,6 +4,7 @@
 const express = require('express');
 const app = express();
 const compression = require('compression');
+const useragent = require('express-useragent');
 
 /**
  * Import own packages
@@ -11,7 +12,7 @@ const compression = require('compression');
 const log = require('./logger');
 const config = require('../config');
 const indexController = require('../controllers/IndexController');
-const useragent = require('express-useragent');
+const report = require('../modules/report');
 
 class web {
     /**
@@ -70,6 +71,11 @@ class web {
         });
         app.get('/report/:uuid', (req, res) => {
             indexController.reportAction(req, res);
+        });
+        app.get('/report/:uuid/raw', (req, res) => {
+            const uuid = req.params.uuid;
+            const reportData = report.load(uuid);
+            res.json(reportData);
         });
 
         /**

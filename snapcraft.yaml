@@ -22,7 +22,7 @@ architectures:
 parts:
   node:
     plugin: dump
-    source: https://nodejs.org/dist/latest-v8.x/node-v8.17.0-linux-x64.tar.xz
+    source: https://nodejs.org/dist/v14.17.2/node-v14.17.2-linux-x64.tar.xz
     stage:
       - bin
       - include
