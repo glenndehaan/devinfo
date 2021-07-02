@@ -74,6 +74,20 @@ The log can be found here:
 
 Then open up a webbrowser and go to: `http://localhost:4289`
 
+## Reports
+After a report has been generated the url should look something like this:
+```
+https://devinfo.example.com/report/76468dd1-e20c-4085-831b-672489ca886a
+```
+
+### Integrations / Raw data
+Every report is also available in a JSON format. Just add `/raw` to the end of a report URL:
+```
+https://devinfo.example.com/report/76468dd1-e20c-4085-831b-672489ca886a/raw
+```
+
+> This data could also be integrated into other applications that might need it
+
 ## Customization
 ### Logo
 By updating the config you are able to override the default logo:
