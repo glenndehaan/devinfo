@@ -1,8 +1,0 @@
-version: '3'
-services:
-  app:
-    build: .
-    ports:
-      - "4289:4289"
-    volumes:
-      - ./docker_config:/var/app

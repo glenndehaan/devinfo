@@ -4,30 +4,11 @@
 const fs = require('fs');
 
 /**
- * Check if we are using the production version
- */
-const snapcraft = process.env.NODE_ENV === 'snapcraft';
-const docker = process.env.NODE_ENV === 'docker';
-
-/**
  * Define save location
  *
  * @type {string}
  */
-let location = '';
-if(snapcraft) {
-    if (!fs.existsSync(`${process.env.SNAP_COMMON}/reports`)){
-        fs.mkdirSync(`${process.env.SNAP_COMMON}/reports`);
-    }
-    location = `${process.env.SNAP_COMMON}/reports`;
-} else if(docker) {
-    if (!fs.existsSync(`/var/app/reports`)){
-        fs.mkdirSync(`/var/app/reports`);
-    }
-    location = `/var/app/reports`;
-} else {
-    location = `${__dirname}/../config/reports`;
-}
+const location = `${__dirname}/../reports`;
 
 class report {
     /**

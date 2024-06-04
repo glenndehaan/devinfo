@@ -4,50 +4,23 @@
   "description": "NPM packages for devinfo",
   "private": true,
   "scripts": {
-    "start": "cd ./app && node ./server.js",
-    "dev": "cd ./app && nodemon -L --ignore videoroute-db.json --watch ./ ./server.js",
-    "lint": "eslint -c ./package.json ./",
-    "madge": "madge ./app && madge ./app --circular"
+    "start": "LOG_LEVEL=trace node app/server.js",
+    "dev": "nodemon --watch app --exec 'LOG_LEVEL=trace node app/server.js'"
   },
   "author": "Glenn de Haan",
   "license": "MIT",
   "engines": {
-    "node": ">=14.0.0"
-  },
-  "eslintConfig": {
-    "parserOptions": {
-      "ecmaVersion": 2018
-    },
-    "env": {
-      "es6": true,
-      "node": true
-    },
-    "rules": {
-      "no-console": 0,
-      "comma-dangle": [
-        "error",
-        "never"
-      ],
-      "indent": [
-        "error",
-        4
-      ]
-    },
-    "extends": "eslint:recommended"
+    "node": ">=20.0.0"
   },
   "dependencies": {
     "check-ip": "^1.1.1",
-    "compression": "^1.7.4",
-    "deepmerge": "^4.1.1",
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
     "express-useragent": "^1.0.15",
-    "simple-node-logger": "^18.12.23",
-    "uuid": "^8.3.2"
+    "js-logger": "^1.6.1",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "eslint": "^7.29.0",
-    "madge": "^5.0.1",
-    "nodemon": "^2.0.9"
+    "nodemon": "^3.1.3"
   }
 }

@@ -10,6 +10,4 @@ node_modules/
 npm-debug.log
 
 # App
-config.json
-*.log
-app/config/reports/*.json
+app/reports/*.json
