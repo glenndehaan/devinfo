@@ -5,7 +5,7 @@
 #
 # Define OS
 #
-FROM alpine:3.20 AS dependencies
+FROM alpine:3.21 AS dependencies
 
 #
 # Basic OS management
@@ -34,7 +34,7 @@ RUN npm ci --only=production && npm cache clean --force
 #
 # Define OS
 #
-FROM alpine:3.20
+FROM alpine:3.21
 
 #
 # Basic OS management
